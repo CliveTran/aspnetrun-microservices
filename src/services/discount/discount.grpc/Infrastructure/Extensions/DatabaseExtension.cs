@@ -4,13 +4,15 @@ using Npgsql;
 namespace discount.grpc.Infrastructure.Extensions;
 public static class DatabaseExtension
 {
-    public static WebApplication MigrateData(this WebApplication app, int? retry = 0)
+    public static WebApplication MigrateData<TContext>(this WebApplication app, int? retry = 0)
     {
         var services = app.Services;
         var configuration = services.GetRequiredService<IConfiguration>();
+        var logger = services.GetRequiredService<ILogger<TContext>>();
 
         try
         {
+            logger.LogInformation("Migrating...");
             ExecuteMigration(configuration);
         }
 
@@ -18,10 +20,12 @@ public static class DatabaseExtension
         {
             if (retry.HasValue && retry.Value < 50)
             {
+                logger.LogInformation("Migrating failed, retry...");
                 retry++;
                 Thread.Sleep(2000);
-                MigrateData(app, retry);
+                MigrateData<TContext>(app, retry);
             }
+            logger.LogError(ex.Message);
         }
 
         return app;
