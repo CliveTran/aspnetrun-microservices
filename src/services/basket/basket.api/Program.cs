@@ -1,5 +1,5 @@
 using basket.api.Application.Interfaces;
-using basket.api.Infrastructure.GrpcServices;
+using basket.api.Grpc;
 using basket.api.Infrastructure.Repositories;
 using discount.grpc.Protos;
 

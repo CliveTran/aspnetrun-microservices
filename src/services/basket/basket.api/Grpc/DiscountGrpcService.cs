@@ -2,7 +2,7 @@
 using basket.api.Application.Interfaces;
 using discount.grpc.Protos;
 
-namespace basket.api.Infrastructure.GrpcServices;
+namespace basket.api.Grpc;
 public class DiscountGrpcService : IDiscountGrpcService
 {
     private readonly DiscountProtoService.DiscountProtoServiceClient _discountProtoService;
