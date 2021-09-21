@@ -1,4 +1,6 @@
-﻿namespace order.domain.Common
+﻿using System;
+
+namespace order.domain.Common
 {
     public abstract class EntityBase
     {

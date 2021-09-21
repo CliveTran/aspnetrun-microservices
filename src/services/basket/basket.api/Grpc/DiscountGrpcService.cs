@@ -1,6 +1,7 @@
 ﻿
 using basket.api.Application.Interfaces;
 using discount.grpc.Protos;
+using System.Threading.Tasks;
 
 namespace basket.api.Grpc;
 public class DiscountGrpcService : IDiscountGrpcService

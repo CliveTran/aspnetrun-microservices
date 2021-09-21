@@ -9,4 +9,13 @@
     <ProjectReference Include="..\order.domain\order.domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Behaviours\" />
+    <Folder Include="Features\Orders\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
 </Project>
