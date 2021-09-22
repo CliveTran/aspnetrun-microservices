@@ -1,7 +1,8 @@
 ﻿using MediatR;
+using order.application.Models;
 using System.Collections.Generic;
 
-namespace order.application.Features.Orders.Queries
+namespace order.application.Queries
 {
     public class GetOrderListQuery : IRequest<IEnumerable<OrderViewModel>>
     {

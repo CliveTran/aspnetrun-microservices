@@ -1,6 +1,4 @@
-﻿using order.domain.Entities;
-
-namespace order.application.Features.Orders.Queries
+﻿namespace order.application.Models
 {
     public class OrderViewModel
     {
@@ -35,24 +33,5 @@ namespace order.application.Features.Orders.Queries
         public string CVV { get; set; }
 
         public int PaymentMethod { get; set; }
-
-        public OrderViewModel(Order order)
-        {
-            Id = order.Id;
-            UserName = order.UserName;
-            TotalPrice = order.TotalPrice;
-            FirstName = order.FirstName;
-            LastName = order.LastName;
-            EmailAddress = order.EmailAddress;
-            AddressLine = order.AddressLine;
-            Country = order.Country;
-            State = order.State;
-            ZipCode = order.ZipCode;
-            CardName = order.CardName;
-            CardNumber = order.CardNumber;
-            Expiration = order.Expiration;
-            CVV = order.CVV;
-            PaymentMethod = order.PaymentMethod;
-        }
     }
 }
