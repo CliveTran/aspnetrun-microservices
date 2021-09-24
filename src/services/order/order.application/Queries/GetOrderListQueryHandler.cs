@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using order.application.Contracts.Persistence;
+using order.application.Contracts.Repositories;
 using order.application.Models;
 using order.domain.Entities;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using order.application.Contracts.Infrastructure;
-using order.application.Contracts.Persistence;
+using order.application.Contracts.Repositories;
 using order.application.Models;
 using order.domain.Entities;
 using System;

@@ -1,4 +1,7 @@
-﻿namespace order.domain.Common
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace order.domain.Common
 {
     // Learn more: https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects
     public abstract class ValueObject
