@@ -15,12 +15,19 @@ namespace order.application.Commands
         private readonly IOrderRepository _orderRepository;
         private readonly IEmailService _emailService;
         private readonly ILogger<CheckoutOrderCommandHandler> _logger;
-        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IEmailService emailService, ILogger<CheckoutOrderCommandHandler> logger)
-        {
-            _orderRepository = orderRepository;
-            _emailService = emailService;
-            _logger = logger;
-        }
+
+        //public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IEmailService emailService, ILogger<CheckoutOrderCommandHandler> logger)
+        //{
+        //    _orderRepository = orderRepository;
+        //    _emailService = emailService;
+        //    _logger = logger;
+        //}
+
+        public CheckoutOrderCommandHandler(
+            IOrderRepository orderRepository,
+            IEmailService emailService,
+            ILogger<CheckoutOrderCommandHandler> logger)
+            => (_orderRepository, _emailService, _logger) = (orderRepository, emailService, logger);
 
         public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
         {

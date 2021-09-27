@@ -1,6 +1,6 @@
 ﻿namespace order.application.Models
 {
-    class EmailSettings
+    public class EmailSettings
     {
         public string ApiKey { get; set; }
 

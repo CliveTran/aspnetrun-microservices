@@ -1,30 +1,42 @@
-﻿
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Npgsql;
+using System.Threading;
 
 namespace discount.api.Infrastructure.Extensions;
 public static class DatabaseExtension
 {
-    public static WebApplication MigrateData(this WebApplication app, int? retry = 0)
+    public static WebApplication MigrateData<T>(this WebApplication app, int? retry = 0)
     {
-        var services = app.Services;
-        var configuration = services.GetRequiredService<IConfiguration>();
+        // When using scoped services, if you're not creating a scope or within an existing scope - the service becomes a singleton.
+        // See: https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines
 
-        try
+        using (IServiceScope scope = app.Services.CreateScope())
         {
-            ExecuteMigration(configuration);
-        }
+            var configuration = app.Services.GetRequiredService<IConfiguration>();
+            var logger = app.Services.GetRequiredService<ILogger<T>>();
 
-        catch (NpgsqlException ex)
-        {
-            if (retry.HasValue && retry.Value < 50)
+            try
             {
-                retry++;
-                Thread.Sleep(2000);
-                MigrateData(app, retry);
+                ExecuteMigration(configuration);
+                logger.LogInformation("Migrate success.");
             }
-        }
 
-        return app;
+            catch (NpgsqlException ex)
+            {
+                if (retry.HasValue && retry.Value < 50)
+                {
+                    logger.LogError($"Migrate error: {ex}.");
+                    retry++;
+                    Thread.Sleep(2000);
+                    MigrateData<T>(app, retry);
+                }
+            }
+
+            return app;
+        }
     }
 
     private static void ExecuteMigration(IConfiguration configuration)

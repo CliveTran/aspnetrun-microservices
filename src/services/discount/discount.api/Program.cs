@@ -1,5 +1,8 @@
 using discount.api.Infrastructure.Extensions;
 using discount.api.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MigrateData();
+app.MigrateData<Program>();
 
 app.Run();
