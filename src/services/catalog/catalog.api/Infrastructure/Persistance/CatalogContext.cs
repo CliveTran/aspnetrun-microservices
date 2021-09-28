@@ -1,5 +1,5 @@
-﻿
-using catalog.api.Domain.Entities;
+﻿using catalog.api.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
 namespace catalog.api.Infrastructure.Persistance;

@@ -1,7 +1,8 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using discount.api.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
+using System.Threading.Tasks;
 
 namespace discount.api.Infrastructure.Repositories;
 public class DiscountRepository : IDiscountRepository

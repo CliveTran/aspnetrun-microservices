@@ -15,8 +15,8 @@ public static class DatabaseExtension
 
         using (IServiceScope scope = app.Services.CreateScope())
         {
-            var configuration = app.Services.GetRequiredService<IConfiguration>();
-            var logger = app.Services.GetRequiredService<ILogger<T>>();
+            var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<T>>();
 
             try
             {

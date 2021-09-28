@@ -2,6 +2,7 @@
 using basket.api.Domain;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace basket.api.Infrastructure.Repositories;
 public class BasketRepository : IBasketRepository

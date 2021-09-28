@@ -1,5 +1,5 @@
-﻿
-using discount.grpc.Domain.Entities;
+﻿using discount.grpc.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace discount.grpc.Infrastructure.Repositories;
 public interface IDiscountRepository

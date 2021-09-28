@@ -3,6 +3,8 @@ using discount.grpc.Domain.Entities;
 using discount.grpc.Infrastructure.Repositories;
 using discount.grpc.Protos;
 using Grpc.Core;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace discount.grpc.Services;
 public class DiscountService : DiscountProtoService.DiscountProtoServiceBase

@@ -3,6 +3,7 @@ using discount.api.Domain.Entities;
 using discount.api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace discount.api.Controllers;
 [ApiController]

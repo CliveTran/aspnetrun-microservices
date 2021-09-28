@@ -1,5 +1,5 @@
-﻿
-using discount.api.Domain.Entities;
+﻿using discount.api.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace discount.api.Infrastructure.Repositories;
 public interface IDiscountRepository

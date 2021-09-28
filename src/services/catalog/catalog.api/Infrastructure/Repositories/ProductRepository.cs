@@ -2,6 +2,8 @@
 using catalog.api.Domain.Entities;
 using catalog.api.Infrastructure.Persistance;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace catalog.api.Infrastructure.Repositories;
 public class ProductRepository : IProductRepository

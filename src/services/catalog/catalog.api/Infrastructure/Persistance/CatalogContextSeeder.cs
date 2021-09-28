@@ -1,6 +1,7 @@
 ﻿
 using catalog.api.Domain.Entities;
 using MongoDB.Driver;
+using System.Collections.Generic;
 
 namespace catalog.api.Infrastructure.Persistance;
 public class CatalogContextSeeder

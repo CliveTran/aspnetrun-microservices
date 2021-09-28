@@ -1,7 +1,8 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using discount.grpc.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
+using System.Threading.Tasks;
 
 namespace discount.grpc.Infrastructure.Repositories;
 public class DiscountRepository : IDiscountRepository

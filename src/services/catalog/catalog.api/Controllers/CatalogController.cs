@@ -1,7 +1,10 @@
 ﻿using catalog.api.Domain.Entities;
 using catalog.api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Catalog.API.Controllers
 {
@@ -14,8 +17,8 @@ namespace Catalog.API.Controllers
 
         public CatalogController(IProductRepository repository, ILogger<CatalogController> logger)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _repository = repository;
+            _logger = logger;
         }
 
         [HttpGet]

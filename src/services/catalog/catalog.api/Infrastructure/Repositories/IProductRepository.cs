@@ -1,5 +1,7 @@
 ﻿
 using catalog.api.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace catalog.api.Infrastructure.Repositories;
 public interface IProductRepository

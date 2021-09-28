@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using order.api.Extensions;
 using order.application;
 using order.infrastructure;
 
@@ -30,5 +31,7 @@ if (builder.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+//app.MigrateData();
 
 app.Run();
