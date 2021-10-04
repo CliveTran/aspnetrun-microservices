@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using order.api.Extensions;
 using order.application;
 using order.infrastructure;
+using order.infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//app.MigrateData();
+app.MigrateData<OrderContext>((dbContext, services) => 
+{
+    var logger = services.GetRequiredService<ILogger<OrderContext>>();
+    OrderContextSeeder.SeedAsync(dbContext, logger).Wait();
+});
 
 app.Run();

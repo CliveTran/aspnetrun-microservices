@@ -33,7 +33,9 @@ namespace order.application.Commands
         {
             var order = MappingOrder(request);
             var newAddedOrder = await _orderRepository.AddAsync(order);
+
             await SendEmail(newAddedOrder);
+
             return newAddedOrder.Id;
         }
 

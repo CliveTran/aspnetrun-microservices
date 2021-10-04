@@ -8,7 +8,7 @@ namespace order.infrastructure.Persistence
 {
     public class OrderContextSeeder
     {
-        public static async Task SeedAsync(OrderContext orderContext, ILogger<OrderContextSeeder> logger)
+        public static async Task SeedAsync<TContext>(OrderContext orderContext, ILogger<TContext> logger)
         {
             if (!orderContext.Orders.Any())
             {
@@ -22,7 +22,23 @@ namespace order.infrastructure.Persistence
         {
             return new List<Order>
             {
-                new Order() {UserName = "vinhnhan", FirstName = "Nhan", LastName = "Vinh", EmailAddress = "tranvinhnhan@gmail.com", AddressLine = "HCM", Country = "Vietnam", TotalPrice = 350 }
+                new Order()
+                {
+                    UserName = "vinhnhan",
+                    TotalPrice = 350,
+                    FirstName = "Nhan",
+                    LastName = "Vinh",
+                    EmailAddress = "tranvinhnhan@gmail.com",
+                    AddressLine = "HCM",
+                    Country = "Vietnam",
+                    State = "HCM",
+                    ZipCode = "70000",
+                    CardName  = "Tran Vinh Nhan",
+                    CardNumber  = "0101010101010101",
+                    Expiration  = "02/29",
+                    CVV = "235" ,
+                    PaymentMethod = 1
+                }
             };
         }
     }

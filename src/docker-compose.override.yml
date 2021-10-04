@@ -19,13 +19,22 @@ services:
     container_name: discountdb
     environment:
       - POSTGRES_USER=sa
-      - POSTGRES_PASSWORD=1
+      - POSTGRES_PASSWORD=P@ssword
       - POSTGRES_DB=DiscountDb
     restart: always
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+
+  orderdb:
+    container_name: orderdb
+    environment:
+        SA_PASSWORD: "P@ssword"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "14300:1433"
 
   catalog.api:
     container_name: catalog.api
@@ -53,7 +62,7 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=sa;Password=1;"
+      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=sa;Password=P@ssword;"
     depends_on:
       - discountdb
     ports:
@@ -64,9 +73,18 @@ services:
     container_name: discount.grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=sa;Password=1;"
+      - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=sa;Password=P@ssword;"
     depends_on:
       - discountdb
     ports:
       - "8003:80"
 
+  #order.api:
+  #  container_name: order.api
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #    - "ConectionStrings:OrderConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=P@ssword"
+  #  depends_on:
+  #    - orderdb
+  #  ports:
+  #    - "8004:80"

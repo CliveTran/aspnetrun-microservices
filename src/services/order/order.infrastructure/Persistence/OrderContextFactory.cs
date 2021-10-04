@@ -7,9 +7,7 @@ namespace order.infrastructure.Persistence
     {
         public OrderContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<OrderContext>();
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=OrderDb;User Id=sa;Password=1;");
-
+            var optionsBuilder = new DbContextOptionsBuilder<OrderContext>(); 
             return new OrderContext(optionsBuilder.Options);
         }
     }

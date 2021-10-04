@@ -10,6 +10,9 @@ services:
   discountdb:
     image: postgres
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
@@ -34,7 +37,14 @@ services:
       context: .
       dockerfile: services/discount/discount.grpc/Dockerfile
 
+  #order.api:
+  #  image: ${DOCKER_REGISTRY-}orderapi
+  #  build:
+  #    context: .
+  #    dockerfile: services/order/order.api/Dockerfile
+
 volumes:
   mongo_data:
   postgres_data:
+
 

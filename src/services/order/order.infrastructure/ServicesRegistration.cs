@@ -14,7 +14,7 @@ namespace order.infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<OrderContext>(opt => opt.UseSqlServer());
+            services.AddDbContext<OrderContext>(option => option.UseSqlServer(configuration.GetConnectionString("OrderConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.Configure<EmailSettings>(_ => configuration.GetSection("EmailSettings"));

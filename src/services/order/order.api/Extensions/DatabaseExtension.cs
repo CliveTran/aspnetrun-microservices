@@ -32,11 +32,16 @@ namespace order.api.Extensions
 
                 catch (SqlException ex)
                 {
-                    throw;
+                    logger.LogError(ex, $"Exception when migrating database: {ex.Message}");
+                    retryForAvailibility++;
+                    if (retryForAvailibility < 50)
+                        MigrateData(app, seeder, retryForAvailibility);
+                    else
+                        throw;
                 }
             }
 
-                return app;
+            return app;
         }
     }
 }

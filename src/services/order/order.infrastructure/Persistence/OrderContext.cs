@@ -15,7 +15,9 @@ namespace order.infrastructure.Persistence
         public DbSet<Order> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        { }
+        {
+            optionsBuilder.UseSqlServer("Server=orderdb;Database=OrderDb;User Id=sa;Password=P@ssword;");
+        }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -25,11 +27,13 @@ namespace order.infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
-                        entry.Entity.CreatedBy = "username";
+                        entry.Entity.CreatedBy = "vinhnhan";
+                        entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Entity.LastModifiedBy = "vinhnhan";
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
-                        entry.Entity.LastModifiedBy = "username";
+                        entry.Entity.LastModifiedBy = "vinhnhan-updated";
                         break;
                 }
             }
