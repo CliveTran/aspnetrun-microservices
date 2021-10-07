@@ -16,7 +16,7 @@ namespace order.infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=orderdb;Database=OrderDb;User Id=sa;Password=P@ssword;");
+            optionsBuilder.UseSqlServer("Server=localhost,14300;Database=OrderDb;User Id=sa;Password=P@ssword;");
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

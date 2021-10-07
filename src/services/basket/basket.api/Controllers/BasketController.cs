@@ -1,6 +1,9 @@
 ﻿using basket.api.Application.Interfaces;
+using basket.api.Application.Models;
 using basket.api.Domain;
 using basket.api.Infrastructure.Repositories;
+using EventBus.Message.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,11 +15,16 @@ namespace basket.api.Controllers
     {
         private readonly IBasketRepository _repository;
         private readonly IDiscountGrpcService _discountGrpcService;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public BasketController(IBasketRepository repository, IDiscountGrpcService discountGrpcService)
+        public BasketController(
+            IBasketRepository repository,
+            IDiscountGrpcService discountGrpcService,
+            IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
             _discountGrpcService = discountGrpcService;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet("{userName}", Name = "GetBasket")]
@@ -42,6 +50,44 @@ namespace basket.api.Controllers
         {
             await _repository.DeleteBasket(userName);
             return Ok();
+        }
+
+        [Route("[action]")] // equal [HttpPost("Checkout")]
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CheckoutInfo info)
+        {
+            var basket = await _repository.GetBasket(info.UserName);
+            if (basket is null)
+                return BadRequest();
+
+            var eventMessage = Mapping(info, basket.TotalPrice);
+
+            BasketCheckoutEvent Mapping(CheckoutInfo info, decimal totalPrice)
+            {
+                return new BasketCheckoutEvent
+                {
+                    UserName = info.UserName,
+                    TotalPrice = totalPrice,
+                    FirstName = info.FirstName,
+                    LastName = info.LastName,
+                    EmailAddress = info.EmailAddress,
+                    AddressLine = info.AddressLine,
+                    Country = info.Country,
+                    State = info.State,
+                    ZipCode = info.ZipCode,
+                    CardName = info.CardName,
+                    CardNumber = info.CardNumber,
+                    Expiration = info.Expiration,
+                    CVV = info.CVV,
+                    PaymentMethod = info.PaymentMethod
+                };
+            }
+
+            await _publishEndpoint.Publish(eventMessage);
+
+            await _repository.DeleteBasket(info.UserName);
+
+            return Accepted();
         }
     }
 }

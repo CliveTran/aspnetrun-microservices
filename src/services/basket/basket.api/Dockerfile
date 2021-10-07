@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["services/basket/basket.api/basket.api.csproj", "services/basket/basket.api/"]
+COPY ["BuildingBlocks/EventBus.Message/EventBus.Message.csproj", "BuildingBlocks/EventBus.Message/"]
 RUN dotnet restore "services/basket/basket.api/basket.api.csproj"
 COPY . .
 WORKDIR "/src/services/basket/basket.api"

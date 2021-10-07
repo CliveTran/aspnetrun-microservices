@@ -29,9 +29,9 @@ namespace order.application.Commands
             ILogger<CheckoutOrderCommandHandler> logger)
             => (_orderRepository, _emailService, _logger) = (orderRepository, emailService, logger);
 
-        public async Task<int> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CheckoutOrderCommand command, CancellationToken cancellationToken)
         {
-            var order = MappingOrder(request);
+            var order = MappingOrder(command);
             var newAddedOrder = await _orderRepository.AddAsync(order);
 
             await SendEmail(newAddedOrder);

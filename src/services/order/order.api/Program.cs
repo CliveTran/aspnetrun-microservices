@@ -1,7 +1,11 @@
+using EventBus.Message.Common;
+using EventBus.Message.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using order.api.EventBusComsumers;
 using order.api.Extensions;
 using order.application;
 using order.infrastructure;
@@ -19,6 +23,19 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddMassTransit(config =>
+{
+    config.AddConsumer<BasketCheckoutComsumer>();
+    config.UsingRabbitMq((context, config) =>
+    {
+        config.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, config =>
+        {
+            config.ConfigureConsumer<BasketCheckoutComsumer>(context);
+        });
+    });
+});
+builder.Services.AddMassTransitHostedService();
 
 var app = builder.Build();
 

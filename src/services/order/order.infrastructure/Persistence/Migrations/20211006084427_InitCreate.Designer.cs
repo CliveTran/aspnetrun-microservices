@@ -10,8 +10,8 @@ using order.infrastructure.Persistence;
 namespace order.infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20211004082224_Test")]
-    partial class Test
+    [Migration("20211006084427_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
