@@ -1,5 +1,4 @@
-﻿
-using discount.grpc.Domain.Entities;
+﻿using discount.grpc.Domain.Entities;
 using discount.grpc.Infrastructure.Repositories;
 using discount.grpc.Protos;
 using Grpc.Core;

@@ -13,29 +13,29 @@ services:
   orderdb:
     image: mcr.microsoft.com/mssql/server:2019-latest
 
-  catalog.api:
-    image: ${DOCKER_REGISTRY-}catalogapi
-    build:
-      context: .
-      dockerfile: services/catalog/catalog.api/Dockerfile
+  #catalog.api:
+  #  image: ${DOCKER_REGISTRY-}catalogapi
+  #  build:
+  #    context: .
+  #    dockerfile: services/catalog/catalog.api/Dockerfile
 
-  basket.api:
-    image: ${DOCKER_REGISTRY-}basketapi
-    build:
-      context: .
-      dockerfile: services/basket/basket.api/Dockerfile
+  #basket.api:
+  #  image: ${DOCKER_REGISTRY-}basketapi
+  #  build:
+  #    context: .
+  #    dockerfile: services/basket/basket.api/Dockerfile
 
-  discount.api:
-    image: ${DOCKER_REGISTRY-}discountapi
-    build:
-      context: .
-      dockerfile: services/discount/discount.api/Dockerfile
+  #discount.api:
+  #  image: ${DOCKER_REGISTRY-}discountapi
+  #  build:
+  #    context: .
+  #    dockerfile: services/discount/discount.api/Dockerfile
 
-  discount.grpc:
-    image: ${DOCKER_REGISTRY-}discountgrpc
-    build:
-      context: .
-      dockerfile: services/discount/discount.grpc/Dockerfile
+  #discount.grpc:
+  #  image: ${DOCKER_REGISTRY-}discountgrpc
+  #  build:
+  #    context: .
+  #    dockerfile: services/discount/discount.grpc/Dockerfile
 
   #order.api:
   #  image: ${DOCKER_REGISTRY-}orderapi
